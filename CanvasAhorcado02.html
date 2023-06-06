@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>-El juego del ahorcado-</h1>
+    <canvas id="pantalla" width="960px" height="450px">
+        <script>  
+        /***Variables**/
+        var ctx;
+        var canvas;
+        var palabra;
+        var letras = "QWERTYUIOPASDFGHJKLNZXCVBNM";
+        var colorTecla = "purple";
+        var colorMargen = "yellow";
+        var inicioX=200;
+        var inicioY=300;
+        var lon=35;
+        var margen = 20;
+        //Arreglos
+        var teclas_array = new Array(); 
+        var letras_array = new Array();
+        var palabras_array = new Array();
+        //Variables de control 
+        var aciertos = 0;
+        var errores = 0;
+        //los objetos del juego 
+        palabras_array.push("PEGASO");
+        palabras_array.push("AFRODITA");
+        palabras_array.push("ATENEA");
+        palabras_array.push("HARES");
+        palabras_array.push("CRONOS");
+        palabras_array.push("HERMES");
+        palabras_array.push("DIONISIO");
+        palabras_array.push("PERSEO");
+        palabras_array.push("POSEIDON");
+        
+        function Tecla(x,y,ancho,alto,letra){
+            this.x = x;
+            this.y = y;
+            this.ancho = ancho;
+            this.alto = alto;
+            this.letra = letra;
+            this.dibuja = dibujaTecla;
+        }
+        function Letra(x,y,ancho,alto,letra){
+            this.x = x;
+            this.y = y;
+            this.ancho = ancho;
+            this.alto = alto;
+            this.letra = letra;
+            this.dibuja = dibujaCajaTecla;
+            this.dibujaLetra =dibujaLetraLetra;
+        }
+        //
+
+        function dibujaTecla(){
+            var w = this.ancho;
+            var h = this.alto;
+            ctx.fillStyle = colorTecla;
+            ctx.strokeStyle = colorMargen;
+            ctx.fillRect(this.x,this.y,this.ancho,this.alto);
+            ctx.strokeRect(this.x,this.y,this.ancho,this.alto);
+            //
+            ctx.fillStyle = "white";
+            ctx.font = "bold 20px courier";
+            ctx.fillText(this.letra,this.x+w /2-5, this.y+h/2+5);
+        }
+        function dibujaCajaLetra(){
+
+            ctx.fillStyle = "white";
+            ctx.strokeStyle = "black";
+            ctx.fillRect(this.x,this.y,this.ancho,this.alto);
+            ctx.strokeRect(this.x,this.y,this.ancho,this.alto);  
+        }
+        function teclado(){
+            var ren = 0;
+            var col = 0;
+            var letra = "";
+            var miLetra;
+            var x = inicioX;
+            var y = incioY;
+            for(var i = 0;i<letras.length;i++){
+                letra = letras.substr(i,1);
+                miLetra = new Tecla(x,y,lon,lon,letra);
+                miLetra.dibuja();
+                teclas_array.push(miLetra);
+                //
+                x+=lon + margen;
+                col++;
+                if(col==10){
+                    col = 0;
+                    ren++;
+                    if(ren==2){
+                        x= 280;
+                    }else{
+                        x = inicioX;
+                    }
+                }
+                y = inicioY + ren * 50;
+            }
+        }
+        window.onload =function(){
+            canvas = document.getElementById("micanvas");
+            if(canvas && canvas.getContext){
+                ctx = canvas.getContext("2d");
+                if(ctx){
+                    teclado();
+                }else{
+                    alert("Error al crear tu contexto");
+                }
+            }
+        }
+        </script>
+
+        
+</body>
+</html>

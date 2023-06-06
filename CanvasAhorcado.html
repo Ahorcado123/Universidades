@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>-El juego del ahorcado-</h1>
+    <canvas id="pantalla" width="960px" height="450px">
+        <script>  
+        /***Variables**/
+        var ctx;
+        var canvas;
+        var palabra;
+        var letras = "QWERTYUIOPASDFGHJKLNZXCVBNM";
+        var colorTecla = "purple";
+        var colorMargen = "yellow";
+        var inicioX=200;
+        var inicioY=300;
+        var lon=35;
+        var margen = 20;
+        //Arreglos
+        var teclas_array = new Array(); 
+        var letras_array = new Array();
+        var palabras_array = new Array();
+        //Variables de control 
+        var aciertos = 0;
+        var errores = 0;
+        //los objetos del juego 
+        function Tecla(x,y,ancho,alto,letra){
+            this.x = x;
+            this.y = y;
+            this.ancho = ancho;
+            this.alto = alto;
+            this.letra = letra;
+            this.dibuja = dibujaTecla;
+        }
+        function Letra(x,y,ancho,alto,letra){
+            this.x = x;
+            this.y = y;
+            this.ancho = ancho;
+            this.alto = alto;
+            this.letra = letra;
+            this.dibuja = dibujaCajaTecla;
+            this.dibujaLetra =dibujaLetraLetra;
+        }
+        //
+        palabras_array.push("PEGASO");
+        palabras_array.push("AFRODITA");
+        palabras_array.push("ATENEA");
+        palabras_array.push("HARES");
+        palabras_array.push("CRONOS");
+        palabras_array.push("HERMES");
+        palabras_array.push("DIONISIO");
+        palabras_array.push("PERSEO");
+        palabras_array.push("POSEIDON");
+        palabras_array.push("APOLO");
+
+        </script>
+        
+</body>
+</html>
